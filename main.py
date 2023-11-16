@@ -11,10 +11,6 @@ engine.setProperty('voice',voices[0])     #voices[0] represent male voice
 engine.setProperty('rate', 150)  
 engine.setProperty('volume', 0.7)  
 
-engine.say('Hello Guys!! I am byte-voice.')
-engine.runAndWait()   #Waiting for the sentence to be finished.
-
-
 #This function is implemented to take the user's input.
 def userCommand():  
     
@@ -32,4 +28,10 @@ def userCommand():
         print('Unable to recognize,please say that again..')
         return 'None'
     return input
+
+def greet():
+    engine.say(' ByteVoice Activated...........Hello!!! I am ByteVoice. I am here to help you!!! Can you specify, what should I do for you ?')
+    engine.runAndWait()
+if __name__=="__main__":
+    greet()
         
