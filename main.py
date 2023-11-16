@@ -1,6 +1,8 @@
 import pyttsx3
 import speech_recognition as sr
 import wikipedia
+import webbrowser
+import pyautogui 
 
 
 #Intiliazing the TTS engine and loading the driver object of device.
@@ -53,11 +55,28 @@ if __name__=="__main__":
             print('Recognition failed,Please try again')
             continue
         
-        if 'wikipedia' in input_text:            #Checking if user asks for wikipedia command
+        if 'wikipedia' in input_text:                            #Checking if user asks for wikipedia command
             speak('Searching Wikipedia')
             input_text=input_text.replace('wikipedia','')       #Extracting only the topic to be searched from the user input voice data
             info=wikipedia.summary(input_text,sentences=2)       #Searching info about topic
             speak(info)
-            break
+            
+        elif 'open google' in input_text:
+            webbrowser.open('google.com')                        #Opening google.com
+            
+        elif 'close google' in input_text:
+            pyautogui.hotkey('ctrl','w')                         #Shortcut for closing any window => ctrl+w
+        
+        elif 'open youtube' in input_text:                       #Opening youtube
+            webbrowser.open('youtube.com')
+        elif 'close youtube'in input_text:
+             pyautogui.hotkey('ctrl','w') 
+             break         
+            
+            
+            
+        
+            
+            
             
         
