@@ -1,5 +1,7 @@
 import pyttsx3
 import speech_recognition as sr
+import wikipedia
+
 
 #Intiliazing the TTS engine and loading the driver object of device.
 engine=pyttsx3.init('sapi5')
@@ -22,16 +24,40 @@ def userCommand():
         
     try:
             print('Recognizing...')
-            input=r.recognize_google(message,language='en-in')   #Recognizing the input of user using Google Web Speech API
+            voice_input=r.recognize_google(message,language='en-in')   #Recognizing the input of user using Google Web Speech API
             print(f'User said: {input}\n')
+            return voice_input
     except Exception as e:
         print('Unable to recognize,please say that again..')
         return 'None'
-    return input
+    
+   
 
 def greet():
     engine.say(' ByteVoice Activated...........Hello!!! I am ByteVoice. I am here to help you!!! Can you specify, what should I do for you ?')
     engine.runAndWait()
+    
+def speak(message):
+    engine.say(message)
+    engine.runAndWait()
+    
+    
 if __name__=="__main__":
     greet()
+    while True:
+        user_input=userCommand()          #Getting the commands of user in the form of list
+        
+        if user_input != 'None':
+            input_text = user_input.lower()            # type: ignore
+        else:
+            print('Recognition failed,Please try again')
+            continue
+        
+        if 'wikipedia' in input_text:            #Checking if user asks for wikipedia command
+            speak('Searching Wikipedia')
+            input_text=input_text.replace('wikipedia','')       #Extracting only the topic to be searched from the user input voice data
+            info=wikipedia.summary(input_text,sentences=2)       #Searching info about topic
+            speak(info)
+            break
+            
         
