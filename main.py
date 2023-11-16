@@ -3,6 +3,8 @@ import speech_recognition as sr
 import wikipedia
 import webbrowser
 import pyautogui 
+import pywhatkit as pkit
+import time
 
 
 #Intiliazing the TTS engine and loading the driver object of device.
@@ -36,7 +38,8 @@ def userCommand():
    
 
 def greet():
-    engine.say(' ByteVoice Activated...........Hello!!! I am ByteVoice. I am here to help you!!! Can you specify, what should I do for you ?')
+    engine.say('ByteVoice Activated!!!')
+    engine.say('Hello,I am ByteVoice. I am here to help you!!! Can you specify, what should I do for you ?')
     engine.runAndWait()
     
 def speak(message):
@@ -71,7 +74,21 @@ if __name__=="__main__":
             webbrowser.open('youtube.com')
         elif 'close youtube'in input_text:
              pyautogui.hotkey('ctrl','w') 
-             break         
+        elif 'search google' in input_text:
+            speak('What should I search for???')
+            speak('Opening Google')
+            search_input=userCommand()                            #Reciving user's input for topic of search
+            webbrowser.open(f'https://www.google.com/search?q={search_input}')     #Embeding the topic in url,using google's search format 
+        elif 'search youtube' in input_text:
+            speak('What should I search for???')
+            search_input=userCommand()
+            speak('Opening YouTube')
+            webbrowser.open('youtube.com')
+            time.sleep(2)                                            #Waiting for youtube to open
+            pyautogui.press('/')                                     #Shortcut for selecting youtube search box
+            pyautogui.typewrite(f'{search_input}')               # Typing the voice input in the YouTube search bar
+            pyautogui.press('enter')                            # Press Enter to start the search
+            break
             
             
             
