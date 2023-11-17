@@ -58,6 +58,28 @@ def photo():
     time.sleep(2)
     pyautogui.press('enter')
     speak('Photo Saved successfully!!')
+    
+def open_intellij():
+    speak('Opening intellij')
+    pyautogui.hotkey('win')
+    time.sleep(2)
+    pyautogui.typewrite('intellij')
+    time.sleep(2)
+    pyautogui.press('enter')
+    
+
+def close_wind():
+     pyautogui.hotkey('alt','f4') 
+     
+
+def open_vscode():
+    speak('Opening vscode')
+    pyautogui.hotkey('win')
+    time.sleep(2)
+    pyautogui.typewrite('vscode')
+    time.sleep(2)
+    pyautogui.press('enter')
+    
 
     
 if __name__=="__main__":
@@ -119,11 +141,28 @@ if __name__=="__main__":
             os.system('taskkill /f /im "Microsoft.Media.Player.exe"')    #Specifying process name to terminate the process.
         
         elif 'click photo' in input_text:
-            photo()
+            photo()                                                        #Calling photo function
         
         elif 'stop camera' in input_text:
             speak('closing camera')
-            pyautogui.hotkey('alt','f4')
-            break
+            pyautogui.hotkey('alt','f4')                                   #Closing the current window
+        
+        elif 'open command prompt'in input_text:
+            speak('Opening command prompt')
+            #Opening command prompt
+            os.system('start cmd')    
+          
+        elif 'close command prompt' in input_text:
+            speak('Closing command prompt')
+            #Terminating the process and closing command prompt
+            os.system('taskkill /f /im "WindowsTerminal.exe"')             
             
-    
+        elif 'open java code editor' in input_text or 'open kotlin code editor' in input_text:
+            open_intellij()
+            
+        elif 'close window' in input_text:
+            close_wind()
+            break
+        elif 'open vscode' in input_text:
+            open_vscode()
+            break
