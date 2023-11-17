@@ -256,7 +256,16 @@ if __name__=="__main__":
             
         elif 'stop music' in input_text:
             #Specifying process name to terminate the process.
-            os.system('taskkill /f /im "Microsoft.Media.Player.exe"')    
+            os.system('taskkill /f /im "Microsoft.Media.Player.exe"')  
+            
+        elif 'volume up' in input_text:
+            pyautogui.press('volumeup')
+        
+        elif 'volume down' in input_text:
+            pyautogui.press('volumedown')
+        
+        elif 'volume mute' in input_text:
+            pyautogui.press('volumemute')  
         
         elif 'click photo' in input_text:
              #Calling photo function
