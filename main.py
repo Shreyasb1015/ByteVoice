@@ -51,10 +51,10 @@ def speak(message):
 if __name__=="__main__":
     greet()
     while True:
-        user_input=userCommand()          #Getting the commands of user in the form of list
+        user_input=userCommand()                                  #Getting the commands of user in the form of list
         
         if user_input != 'None':
-            input_text = user_input.lower()            # type: ignore
+            input_text = user_input.lower()                       # type: ignore
         else:
             print('Recognition failed,Please try again')
             continue
@@ -102,6 +102,9 @@ if __name__=="__main__":
             songs=os.listdir(music_dir)                                 #Getting the list of all songs in directory
             play_song= random.choice(songs)                             #Choosing random song from the list of songs
             os.startfile(os.path.join(music_dir,play_song))             #Starting the file using os.startfile()
+            
+        elif 'stop music' in input_text:
+            os.system('taskkill /f /im "Microsoft.Media.Player.exe"')    #Specifying process name to terminate the process.
             break
             
     
