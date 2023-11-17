@@ -30,7 +30,7 @@ def userCommand():
     try:
             print('Recognizing...')
             voice_input=r.recognize_google(message,language='en-in')   #Recognizing the input of user using Google Web Speech API
-            print(f'User said: {input}\n')
+            print(f'User said: {voice_input}\n')
             return voice_input
     except Exception as e:
         print('Unable to recognize,please say that again..')
@@ -48,6 +48,7 @@ def speak(message):
     engine.runAndWait()
 
 def photo():
+    
     speak('Opening Camera')
     pyautogui.hotkey('win')
     time.sleep(2)
@@ -60,6 +61,7 @@ def photo():
     speak('Photo Saved successfully!!')
     
 def open_intellij():
+    
     speak('Opening intellij')
     pyautogui.hotkey('win')
     time.sleep(2)
@@ -73,13 +75,79 @@ def close_wind():
      
 
 def open_vscode():
+    
     speak('Opening vscode')
     pyautogui.hotkey('win')
     time.sleep(2)
     pyautogui.typewrite('vscode')
     time.sleep(2)
     pyautogui.press('enter')
- 
+
+
+#This is dictionary for storing code snippets of various languages. 
+code_snippets = {
+    'C language': '''
+#include <stdio.h>
+
+int main() {
+    printf("Hello, World!\\n");
+    return 0;
+}
+''',
+    'python': '''
+print("Hello, World!")
+''',
+    'c++': '''
+#include <iostream>
+
+int main() {
+    // Write C++ code here
+    std::cout << "Hello world!";
+    return 0;
+}
+''',
+    'JavaScript': '''
+console.log("Welcome to Programiz!");
+''',
+    'Java': '''
+class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+''',
+    'HTML': '''
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your HTML Page</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>This is a sample HTML page.</p>
+</body>
+</html>
+''',
+    'CSS': '''
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 20px;
+}
+
+h1 {
+    color: #0066cc;
+}
+
+p {
+    line-height: 1.6;
+}
+'''
+}
+
 def newFile():
     
     speak('please specify filename')
@@ -91,22 +159,28 @@ def newFile():
     
     if language =='python':
         extension='py'
-    elif language =='c':
+    elif language =='C language':
         extension='c'
     elif language == 'c++':
         extension= 'cpp'
-    elif language== 'java':
+    elif language== 'Java':
         extension='java'
-    elif language == 'javascript':
+    elif language == 'javaScript':
         extension='js'
-    elif language == 'html':
+    elif language == 'HTML':
         extension = 'html'
-    elif language == 'css':
+    elif language == 'CSS':
         extension ='css'
     
     command = f'code {file_name}.{extension}'       #Creating command format
+     
+    #Running the command in terminal
+    os.system(command)                            
     
-    os.system(command)                              #Running the command in terminal
+  
+    if language in code_snippets:
+        code_snippet = code_snippets[language]       #type:ignore
+        pyautogui.typewrite(code_snippet)
     
     speak('file created successfully!!!')
         
@@ -143,34 +217,50 @@ if __name__=="__main__":
             search_input=userCommand()                                          #Reciving user's input for topic of search
             speak('Opening Google')                       
             webbrowser.open(f'https://www.google.com/search?q={search_input}')     #Embeding the topic in url,using google's search format 
+            
         elif 'search youtube' in input_text:
+            
             speak('What should I search for???')
             search_input=userCommand()
             speak('Opening YouTube')
             webbrowser.open('youtube.com')
-            time.sleep(2)                                            #Waiting for youtube to open
+            #Waiting for youtube to open
+            time.sleep(2)                                           
             pyautogui.press('/')                                     #Shortcut for selecting youtube search box
-            pyautogui.typewrite(f'{search_input}')                  # Typing the voice input in the YouTube search bar
-            pyautogui.press('enter')                                # Press Enter to start the search
+            # Typing the voice input in the YouTube search bar
+            pyautogui.typewrite(f'{search_input}')  
+            # Pressing Enter to start the search               
+            pyautogui.press('enter')         
+                                   
         elif 'take screenshot' in input_text:
+            
             speak('Specify the name for yout file.')
             name=userCommand().lower()              #type:ignore
-            time.sleep(3)                                             #Waiting for user to send input
+            #Waiting for user to send input
+            time.sleep(3)                                            
             speak('Taking screenshot')
-            img=pyautogui.screenshot(f'Byte-Voice/{name}.png')        #Saving the screenshot as per user's filename
+            #Saving the screenshot as per user's filename
+            img=pyautogui.screenshot(f'Byte-Voice/{name}.png')        
             speak('Screenshot saved successfully!!')
             
         elif 'play music' in input_text:
-            music_dir='C:\\Users\\bagwe\\Music'                         #specifying path of music directory
-            songs=os.listdir(music_dir)                                 #Getting the list of all songs in directory
-            play_song= random.choice(songs)                             #Choosing random song from the list of songs
-            os.startfile(os.path.join(music_dir,play_song))             #Starting the file using os.startfile()
+            
+            #specifying path of music directory
+            music_dir='C:\\Users\\bagwe\\Music'    
+            #Getting the list of all songs in directory                    
+            songs=os.listdir(music_dir)    
+            #Choosing random song from the list of songs                           
+            play_song= random.choice(songs)  
+            #Starting the file using os.startfile()                           
+            os.startfile(os.path.join(music_dir,play_song))          
             
         elif 'stop music' in input_text:
-            os.system('taskkill /f /im "Microsoft.Media.Player.exe"')    #Specifying process name to terminate the process.
+            #Specifying process name to terminate the process.
+            os.system('taskkill /f /im "Microsoft.Media.Player.exe"')    
         
         elif 'click photo' in input_text:
-            photo()                                                        #Calling photo function
+             #Calling photo function
+            photo()                                                      
         
         elif 'stop camera' in input_text:
             speak('closing camera')
