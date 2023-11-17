@@ -5,7 +5,8 @@ import webbrowser
 import pyautogui 
 import pywhatkit as pkit
 import time
-
+import os
+import random
 
 #Intiliazing the TTS engine and loading the driver object of device.
 engine=pyttsx3.init('sapi5')
@@ -76,8 +77,8 @@ if __name__=="__main__":
              pyautogui.hotkey('ctrl','w') 
         elif 'search google' in input_text:
             speak('What should I search for???')
-            speak('Opening Google')
-            search_input=userCommand()                            #Reciving user's input for topic of search
+            search_input=userCommand()                                          #Reciving user's input for topic of search
+            speak('Opening Google')                       
             webbrowser.open(f'https://www.google.com/search?q={search_input}')     #Embeding the topic in url,using google's search format 
         elif 'search youtube' in input_text:
             speak('What should I search for???')
@@ -89,15 +90,19 @@ if __name__=="__main__":
             pyautogui.typewrite(f'{search_input}')                  # Typing the voice input in the YouTube search bar
             pyautogui.press('enter')                                # Press Enter to start the search
         elif 'take screenshot' in input_text:
+            speak('Specify the name for yout file.')
+            name=userCommand().lower()              #type:ignore
+            time.sleep(3)                                             #Waiting for user to send input
             speak('Taking screenshot')
-            img=pyautogui.screenshot('Byte-Voice/myscreenshot.png')
+            img=pyautogui.screenshot(f'Byte-Voice/{name}.png')        #Saving the screenshot as per user's filename
             speak('Screenshot saved successfully!!')
+            
+        elif 'play music' in input_text:
+            music_dir='C:\\Users\\bagwe\\Music'                         #specifying path of music directory
+            songs=os.listdir(music_dir)                                 #Getting the list of all songs in directory
+            play_song= random.choice(songs)                             #Choosing random song from the list of songs
+            os.startfile(os.path.join(music_dir,play_song))             #Starting the file using os.startfile()
             break
             
-            
-            
-        
-            
-            
-            
+    
         
