@@ -46,7 +46,19 @@ def greet():
 def speak(message):
     engine.say(message)
     engine.runAndWait()
-    
+
+def photo():
+    speak('Opening Camera')
+    pyautogui.hotkey('win')
+    time.sleep(2)
+    pyautogui.typewrite('camera')
+    time.sleep(3)
+    pyautogui.press('enter')
+    speak('Say Chesse!!')
+    time.sleep(2)
+    pyautogui.press('enter')
+    speak('Photo Saved successfully!!')
+
     
 if __name__=="__main__":
     greet()
@@ -105,7 +117,13 @@ if __name__=="__main__":
             
         elif 'stop music' in input_text:
             os.system('taskkill /f /im "Microsoft.Media.Player.exe"')    #Specifying process name to terminate the process.
+        
+        elif 'click photo' in input_text:
+            photo()
+        
+        elif 'stop camera' in input_text:
+            speak('closing camera')
+            pyautogui.hotkey('alt','f4')
             break
             
     
-        
