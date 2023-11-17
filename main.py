@@ -86,8 +86,12 @@ if __name__=="__main__":
             webbrowser.open('youtube.com')
             time.sleep(2)                                            #Waiting for youtube to open
             pyautogui.press('/')                                     #Shortcut for selecting youtube search box
-            pyautogui.typewrite(f'{search_input}')               # Typing the voice input in the YouTube search bar
-            pyautogui.press('enter')                            # Press Enter to start the search
+            pyautogui.typewrite(f'{search_input}')                  # Typing the voice input in the YouTube search bar
+            pyautogui.press('enter')                                # Press Enter to start the search
+        elif 'take screenshot' in input_text:
+            speak('Taking screenshot')
+            img=pyautogui.screenshot('Byte-Voice/myscreenshot.png')
+            speak('Screenshot saved successfully!!')
             break
             
             
