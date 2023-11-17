@@ -79,9 +79,38 @@ def open_vscode():
     pyautogui.typewrite('vscode')
     time.sleep(2)
     pyautogui.press('enter')
+ 
+def newFile():
     
+    speak('please specify filename')
+    file_name=userCommand()
 
+    speak('Please specify your programming language')
+    language=userCommand()
+    extension=''
     
+    if language =='python':
+        extension='py'
+    elif language =='c':
+        extension='c'
+    elif language == 'c++':
+        extension= 'cpp'
+    elif language== 'java':
+        extension='java'
+    elif language == 'javascript':
+        extension='js'
+    elif language == 'html':
+        extension = 'html'
+    elif language == 'css':
+        extension ='css'
+    
+    command = f'code {file_name}.{extension}'       #Creating command format
+    
+    os.system(command)                              #Running the command in terminal
+    
+    speak('file created successfully!!!')
+        
+                
 if __name__=="__main__":
     greet()
     while True:
@@ -162,7 +191,10 @@ if __name__=="__main__":
             
         elif 'close window' in input_text:
             close_wind()
-            break
+            
         elif 'open vscode' in input_text:
             open_vscode()
+            
+        elif 'create code file' in input_text:
+            newFile()
             break
