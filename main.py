@@ -306,4 +306,17 @@ if __name__=="__main__":
             
         elif 'create code file' in input_text:
             newFile()
+        
+        elif 'refresh the screen' in input_text:
+            pyautogui.moveTo(1551,551, 2)
+            pyautogui.click(x=1551, y=551, clicks=1, interval=0, button='right')
+            pyautogui.moveTo(1620,667, 1)
+            pyautogui.click(x=1620, y=667, clicks=1, interval=0, button='left')
+        
+        elif 'scroll down' in input_text:
+            pyautogui.scroll(1000)
+        
+        elif 'scroll up ' in input_text:
+            pyautogui.scroll(-1000)
             break
+        
