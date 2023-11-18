@@ -7,6 +7,8 @@ import pywhatkit as pkit
 import time
 import os
 import random
+import asyncio
+from jokeapi import Jokes 
 
 #Intiliazing the TTS engine and loading the driver object of device.
 engine=pyttsx3.init('sapi5')
@@ -210,6 +212,14 @@ def write_note():
     time.sleep(5)
     speak('Notes added successfully!!!')
     
+
+async def tell_joke():
+     j = await Jokes()  # Initialise the class
+     joke = await j.get_joke(response_format="txt")  # Retrieve a random joke
+     print(joke)
+     speak(joke)           
+    
+    
                  
 if __name__=="__main__":
     greet()
@@ -363,5 +373,8 @@ if __name__=="__main__":
             time.sleep(1)
             speak('Opening his github page')
             webbrowser.open('https://github.com/Shreyasb1015')
+        
+        elif 'tell me a joke' in input_text:
+            asyncio.run(tell_joke())
             break
         
