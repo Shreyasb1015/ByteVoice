@@ -196,8 +196,21 @@ def search_wiki(input_text):
      speak('Searching Wikipedia')    
      info=wikipedia.summary(input_text,sentences=2)       #Searching info about topic
      speak(info)
+
+def write_note():
+    speak('Opening Notepad')
+    pyautogui.hotkey('win')
+    time.sleep(2)
+    pyautogui.typewrite('notepad')
+    time.sleep(3)
+    pyautogui.press('enter')
+    speak('Please specify your notes')
+    notes=userCommand().lower()                                  #type:ignore
+    pyautogui.typewrite(notes)
+    time.sleep(5)
+    speak('Notes added successfully!!!')
     
-                
+                 
 if __name__=="__main__":
     greet()
     while True:
@@ -328,5 +341,10 @@ if __name__=="__main__":
         
         elif 'thanks bytevoice' in input_text:
             speak('Its my pleasure!!!')
+        
+        elif 'write in notepad' in input_text:
+            write_note()
+            break
+            
         
         
