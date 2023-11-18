@@ -151,6 +151,8 @@ p {
 '''
 }
 
+
+
 def newFile():
     
     speak('please specify filename')
@@ -187,7 +189,14 @@ def newFile():
         pyautogui.typewrite(code_snippet)
     
     speak('file created successfully!!!')
-        
+    
+def search_wiki(input_text):
+    
+     input_text=input_text.replace('wikipedia','')            #Extracting only the topic to be searched from the user input voice data 
+     speak('Searching Wikipedia')    
+     info=wikipedia.summary(input_text,sentences=2)       #Searching info about topic
+     speak(info)
+    
                 
 if __name__=="__main__":
     greet()
@@ -202,10 +211,8 @@ if __name__=="__main__":
         
         #Checking if user asks for wikipedia command
         if 'wikipedia' in input_text:                           
-            speak('Searching Wikipedia')
-            input_text=input_text.replace('wikipedia','')       #Extracting only the topic to be searched from the user input voice data
-            info=wikipedia.summary(input_text,sentences=2)       #Searching info about topic
-            speak(info)
+           
+            search_wiki(input_text)
             
         elif 'open google' in input_text:
             #Opening google.com
@@ -318,5 +325,8 @@ if __name__=="__main__":
         
         elif 'scroll up ' in input_text:
             pyautogui.scroll(-1000)
-            break
+        
+        elif 'thanks bytevoice' in input_text:
+            speak('Its my pleasure!!!')
+        
         
