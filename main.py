@@ -316,15 +316,19 @@ if __name__=="__main__":
             os.system('taskkill /f /im "WindowsTerminal.exe"')             
             
         elif 'open java code editor' in input_text or 'open kotlin code editor' in input_text:
+            #Calling open_intellij function
             open_intellij()
             
         elif 'close window' in input_text:
+            #Calling close_wind function
             close_wind()
             
         elif 'open vscode' in input_text:
+            #Calling open_vscode function
             open_vscode()
             
         elif 'create code file' in input_text:
+            #Calling newfile function
             newFile()
         
         elif 'refresh the screen' in input_text:
@@ -334,17 +338,30 @@ if __name__=="__main__":
             pyautogui.click(x=1620, y=667, clicks=1, interval=0, button='left')
         
         elif 'scroll down' in input_text:
+            #Passing positive value to scroll down
             pyautogui.scroll(1000)
         
         elif 'scroll up ' in input_text:
+            #Passing negative value to scroll up
             pyautogui.scroll(-1000)
         
         elif 'thanks bytevoice' in input_text:
             speak('Its my pleasure!!!')
         
         elif 'write in notepad' in input_text:
+            #Calling write_note function
             write_note()
-            break
-            
         
+        elif 'close notepad' in input_text:
+            
+            #terminating ongoing process
+            os.system('taskkill /f /im "Notepad.exe"')
+        
+        elif 'developer information' in input_text:
+            
+            speak('Name of my developer is Shreyas Bagwe.')
+            time.sleep(1)
+            speak('Opening his github page')
+            webbrowser.open('https://github.com/Shreyasb1015')
+            break
         
