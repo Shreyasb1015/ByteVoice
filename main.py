@@ -21,8 +21,10 @@ engine.setProperty('volume', 0.7)
 #This function is implemented to take the user's input.
 def userCommand():  
     
-    r=sr.Recognizer()   #Creating the instance of Recognizer class
-    with sr.Microphone() as source:   #opennig a connection to the computer's microphone
+    #Creating the instance of Recognizer class
+    r=sr.Recognizer()   
+    #opening a connection to the computer's microphone
+    with sr.Microphone() as source:  
         print('Listening.....')
         r.pause_threshold=1       #Setting the threshold(amount of silence to needed to determine end of user's input) to 1
         message=r.listen(source)   #Capturing the user's input with the microphone in the message variable
@@ -52,6 +54,7 @@ def photo():
     speak('Opening Camera')
     pyautogui.hotkey('win')
     time.sleep(2)
+    #Searching for camera in windows search bar
     pyautogui.typewrite('camera')
     time.sleep(3)
     pyautogui.press('enter')
@@ -172,7 +175,8 @@ def newFile():
     elif language == 'CSS':
         extension ='css'
     
-    command = f'code {file_name}.{extension}'       #Creating command format
+    #Creating command format
+    command = f'code {file_name}.{extension}'      
      
     #Running the command in terminal
     os.system(command)                            
@@ -196,22 +200,27 @@ if __name__=="__main__":
             print('Recognition failed,Please try again')
             continue
         
-        if 'wikipedia' in input_text:                            #Checking if user asks for wikipedia command
+        #Checking if user asks for wikipedia command
+        if 'wikipedia' in input_text:                           
             speak('Searching Wikipedia')
             input_text=input_text.replace('wikipedia','')       #Extracting only the topic to be searched from the user input voice data
             info=wikipedia.summary(input_text,sentences=2)       #Searching info about topic
             speak(info)
             
         elif 'open google' in input_text:
-            webbrowser.open('google.com')                        #Opening google.com
-            
+            #Opening google.com
+            webbrowser.open('google.com')   
+                               
         elif 'close google' in input_text:
             pyautogui.hotkey('ctrl','w')                         #Shortcut for closing any window => ctrl+w
         
-        elif 'open youtube' in input_text:                       #Opening youtube
+        elif 'open youtube' in input_text:     
+            #Opening youtube                 
             webbrowser.open('youtube.com')
+            
         elif 'close youtube'in input_text:
              pyautogui.hotkey('ctrl','w') 
+             
         elif 'search google' in input_text:
             speak('What should I search for???')
             search_input=userCommand()                                          #Reciving user's input for topic of search
@@ -273,8 +282,9 @@ if __name__=="__main__":
         
         elif 'stop camera' in input_text:
             speak('closing camera')
-            pyautogui.hotkey('alt','f4')                                   #Closing the current window
-        
+            #Closing the current window
+            pyautogui.hotkey('alt','f4')   
+                                            
         elif 'open command prompt'in input_text:
             speak('Opening command prompt')
             #Opening command prompt
