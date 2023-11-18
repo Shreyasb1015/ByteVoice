@@ -12,6 +12,7 @@ from jokeapi import Jokes
 import requests
 
 
+
 #Intiliazing the TTS engine and loading the driver object of device.
 engine=pyttsx3.init('sapi5')
 
@@ -217,7 +218,7 @@ def write_note():
 
 async def tell_joke():
      j = await Jokes()  # Initialise the class
-     joke = await j.get_joke(response_format="txt")  # Retrieve a random joke
+     joke = await j.get_joke(response_format="txt")  # Retrieving a random joke
      print(joke)
      speak(joke)           
     
@@ -250,7 +251,45 @@ def get_weatherinfo(city):
 
     except requests.RequestException as e:
         return f"Error: {e}"  
-                 
+
+
+def fetch_random_riddle():
+    api_url = "https://riddles-api.vercel.app/random"
+    response = requests.get(api_url)
+    print(response)
+
+    if response.status_code == 200:
+        riddle_data = response.json()
+        return riddle_data.get("riddle", ""), riddle_data.get("answer", "")
+    else:
+        return None, None
+
+
+def guess_riddle():
+    
+      riddle_question, correct_answer = fetch_random_riddle()
+      if riddle_question and correct_answer:
+        speak("Here's a riddle for you:")
+        time.sleep(1)
+        print(riddle_question)
+        #Asking riddle question to the user
+        speak(riddle_question)
+       
+        
+        #Getting the guess of user
+        user_guess=userCommand()
+        if user_guess.lower() == correct_answer.lower():         #type:ignore
+            speak("Congratulations!!! Your guess is correct.You seems to be a talented person")
+        else:
+            #Printing the correct answer
+            print(f'Correct answer is {correct_answer}')
+            speak(f"Oops!!!Sorry, the correct answer is {correct_answer}.")
+           
+      else:
+          #Handling the data fetching errors.
+        speak("Sorry, there was an error fetching the riddle. Please try again later.")
+    
+                    
 if __name__=="__main__":
     greet()
     while True:
@@ -414,5 +453,11 @@ if __name__=="__main__":
             #Calling get_weather function
             weather_info=get_weatherinfo(loc)
             speak(weather_info)
-            break
         
+        elif 'ask me a riddle' in input_text:
+            
+            #Calling the guess_riddle function
+            guess_riddle()
+            break
+           
+            
