@@ -9,6 +9,8 @@ import os
 import random
 import asyncio
 from jokeapi import Jokes 
+import requests
+
 
 #Intiliazing the TTS engine and loading the driver object of device.
 engine=pyttsx3.init('sapi5')
@@ -219,7 +221,35 @@ async def tell_joke():
      print(joke)
      speak(joke)           
     
+
+def get_weatherinfo(city):
     
+    base_url = "http://api.openweathermap.org/data/2.5/weather"
+    params = {
+        'q': city,
+        'appid': '897d6cb747ac9abbdc978c14364c1925',
+        'units': 'metric'  
+    }
+
+    try:
+        response = requests.get(base_url, params=params)
+        data = response.json()
+
+        if response.status_code == 200:
+            # Extracting relevant weather information
+            main_weather = data['weather'][0]['description']
+            temperature = data['main']['temp']
+            humidity = data['main']['humidity']
+            wind_speed = data['wind']['speed']
+
+            # Formatting the weather information
+            weather_info = f"Weather in {city}: {main_weather}, Temperature: {temperature}°C, Humidity: {humidity}%, Wind Speed: {wind_speed} m/s."
+            return weather_info
+        else:
+            return f"Error: {data['message']}"
+
+    except requests.RequestException as e:
+        return f"Error: {e}"  
                  
 if __name__=="__main__":
     greet()
@@ -376,5 +406,13 @@ if __name__=="__main__":
         
         elif 'tell me a joke' in input_text:
             asyncio.run(tell_joke())
+        
+        elif 'weather update' in input_text:
+            speak('Please,specify your location')
+            #Receiving location from user
+            loc=userCommand()
+            #Calling get_weather function
+            weather_info=get_weatherinfo(loc)
+            speak(weather_info)
             break
         
