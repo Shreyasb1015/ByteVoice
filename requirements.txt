@@ -14,6 +14,7 @@ os --inbuilt package
 random --inbuilt package
 asyncio --inbuilt package
 tkinter --inbuilt package
+wolframalpha --version --5.0.0
 
 ### API  ###
 
