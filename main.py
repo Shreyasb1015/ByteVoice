@@ -12,8 +12,6 @@ from jokeapi import Jokes
 import requests
 import tkinter as tk
 from tkinter import messagebox
-import time
-
 
 
 #Intiliazing the TTS engine and loading the driver object of device.
@@ -351,6 +349,26 @@ class MeditationTimerApp:
         # Showing the main window again
         self.root.deiconify()
 
+def tell_quote():
+    api_url = "https://type.fit/api/quotes"
+    
+    try:
+        response = requests.get(api_url)
+        data = response.json()
+        
+        if data:
+            random_quote = random.choice(data)
+            quote_text = random_quote.get("text", "No quote text available")
+            quote_author = random_quote.get("author", "Unknown author")
+            
+            speak(f'"{quote_text}"')
+        else:
+            speak("Unable to fetch quotes at the moment.")
+    
+    except Exception as e:
+        print(f"Error: {e}")
+        speak("An error occurred while fetching quotes.")
+
                     
 if __name__=="__main__":
     greet()
@@ -521,7 +539,9 @@ if __name__=="__main__":
             #Calling the guess_riddle function
             guess_riddle()
             break
-           
+        
+        elif 'tell me a quote' in input_text:
+            tell_quote()   
             
         elif 'set meditation timer' in input_text:
             root = tk.Tk()
