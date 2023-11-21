@@ -10,6 +10,9 @@ import random
 import asyncio
 from jokeapi import Jokes 
 import requests
+import tkinter as tk
+from tkinter import messagebox
+import time
 
 
 
@@ -289,6 +292,65 @@ def guess_riddle():
           #Handling the data fetching errors.
         speak("Sorry, there was an error fetching the riddle. Please try again later.")
     
+
+
+class MeditationTimerApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Meditation Timer")
+        self.root.geometry("300x200")
+
+        self.label = tk.Label(root, text="Enter meditation time (in seconds):")
+        self.label.pack(pady=10)
+
+        self.entry = tk.Entry(root)
+        self.entry.pack(pady=10)
+
+        self.start_button = tk.Button(root, text="Start Timer", command=self.start_timer)
+        self.start_button.pack()
+
+    def start_timer(self):
+        try:
+            meditation_time = int(self.entry.get())
+            if meditation_time <= 0:
+                messagebox.showerror("Error", "Please enter a valid meditation time.")
+                return
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid number.")
+            return
+
+        self.root.withdraw()  # Hiding the main window during the meditation
+
+        # Creating a new window for the countdown
+        countdown_window = tk.Toplevel()
+        countdown_window.title("Meditation Timer")
+        countdown_window.geometry("300x200")
+
+        countdown_label = tk.Label(countdown_window, text=f"Time remaining: {meditation_time} seconds")
+        countdown_label.pack(pady=10)
+
+        start_time = time.time()
+        end_time = start_time + meditation_time
+
+        while time.time() < end_time:
+            remaining_time = int(end_time - time.time())
+            time_str = f"Time remaining: {remaining_time} seconds"
+            countdown_label.config(text=time_str)
+            countdown_window.update()
+            time.sleep(1)
+
+        time.sleep(2)
+        print('Meditation Time over')
+        speak('Over!!!')
+        # Showing a message when the meditation is complete
+        messagebox.showinfo("Meditation Timer", "Meditation complete!")
+
+        # Closing the countdown window
+        countdown_window.destroy()
+
+        # Showing the main window again
+        self.root.deiconify()
+
                     
 if __name__=="__main__":
     greet()
@@ -461,3 +523,8 @@ if __name__=="__main__":
             break
            
             
+        elif 'set meditation timer' in input_text:
+            root = tk.Tk()
+            app = MeditationTimerApp(root)
+            root.mainloop()
+            break
