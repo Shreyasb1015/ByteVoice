@@ -547,4 +547,7 @@ if __name__=="__main__":
             root = tk.Tk()
             app = MeditationTimerApp(root)
             root.mainloop()
+        
+        elif 'exit' in input_text:
+            speak('Hope you enjoyed my services!!!Signing off!!')
             break
