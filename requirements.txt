@@ -1,0 +1,24 @@
+##This file contains all the information about packages, api and all other things which are related to this project.
+
+
+### PACKAGES   ###
+python --version--3.11.6
+pyttsx3 --version--2.90
+speechRecognition --version--3.10.0
+wikipedia --version--1.4.0
+pyautogui --version--0.9.54
+pywhatkit --version--5.4
+requests --version--2.31.0
+time --inbuilt package
+os --inbuilt package
+random --inbuilt package
+asyncio --inbuilt package
+tkinter --inbuilt package
+
+### API  ###
+
+jokeapi --version--1.0.5
+riddle_api_url ==> https://riddles-api.vercel.app/random
+quote_api_url ==>  https://type.fit/api/quotes
+weather_api_url ==> http://api.openweathermap.org/data/2.5/weather
+
