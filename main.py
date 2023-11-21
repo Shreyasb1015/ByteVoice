@@ -12,6 +12,7 @@ from jokeapi import Jokes
 import requests
 import tkinter as tk
 from tkinter import messagebox
+import wolframalpha
 
 
 #Intiliazing the TTS engine and loading the driver object of device.
@@ -369,7 +370,27 @@ def tell_quote():
         print(f"Error: {e}")
         speak("An error occurred while fetching quotes.")
 
-                    
+
+def ans_to_que(query, app_id):
+    
+    # Initializing the Wolfram Alpha client
+    client = wolframalpha.Client(app_id)
+
+    try:
+        # Performing the query to Wolfram Alpha
+        res = client.query(query)
+
+        # Parsing the result
+        answer = next(res.results).text
+
+        #returning the answer
+        return answer
+
+    except StopIteration:
+        
+        return "Sorry, I couldn't find a relevant answer."
+    
+    
 if __name__=="__main__":
     greet()
     while True:
@@ -548,6 +569,16 @@ if __name__=="__main__":
             app = MeditationTimerApp(root)
             root.mainloop()
         
+        elif 'answer my question'in input_text:
+             
+            wolfram_app_id = "KH7XAP-8P76865RYR" 
+            speak('Please ask me any mathematical or scientific question') 
+            user_query = userCommand()
+            result = ans_to_que(user_query, wolfram_app_id)
+            speak(result)
+            print(result)
+                  
+                
         elif 'exit' in input_text:
             speak('Hope you enjoyed my services!!!Signing off!!')
             break
