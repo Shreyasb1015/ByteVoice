@@ -13,6 +13,8 @@ import requests
 import tkinter as tk
 from tkinter import messagebox
 import wolframalpha
+import base64
+from urllib.request import urlopen
 
 
 #Intiliazing the TTS engine and loading the driver object of device.
@@ -390,9 +392,56 @@ def ans_to_que(query, app_id):
         
         return "Sorry, I couldn't find a relevant answer."
     
+def math(canvas,entry1):
     
-if __name__=="__main__":
+ 
+    API_KEY = 'KH7XAP-8P76865RYR'
+    client = wolframalpha.Client(API_KEY)
+
+    eq = entry1.get()            #To get the input entered by user.
+    res = client.query(eq.strip(), params=(("format", "image,plaintext"),))
+    #Creating empty dictionary
+    data = {}  
+
+    for p in res.pods:
+        for s in p.subpods:
+            if s.img.alt.lower() == "root plot":
+                #Extracting root plot
+                data['rootPlot'] = s.img.src            
+            elif s.img.alt.lower() == "number line":
+                #Extracting number line
+                data['numberLine'] = s.img.src
+
+    data['results'] = [i.texts for i in list(res.results)][0]
+
+    #Printing data 
+    print(data)
+
+    if 'rootPlot' in data:
+        image1_url = data['rootPlot']
+        image1_byt = urlopen(image1_url).read()
+        image1_b64 = base64.encodebytes(image1_byt)
+        photo1 = tk.PhotoImage(data=image1_b64)
+        canvas.photo1 = photo1
+        canvas.create_image(10, 30, image=canvas.photo1, anchor='nw')
+        canvas.create_text(175, 40, fill="darkblue", font="Arial 10", text="Root Plot")
+
+    if 'numberLine' in data:
+        image2_url = data['numberLine']
+        image2_byt = urlopen(image2_url).read()
+        image2_b64 = base64.encodebytes(image2_byt)
+        photo2 = tk.PhotoImage(data=image2_b64)
+        canvas.photo2 = photo2
+        canvas.create_image(10, 240, image=canvas.photo2, anchor='nw')
+        canvas.create_text(175, 230, fill="darkblue", font="Arial 10", text="Number Line")
+
+    # Display the result text
+    canvas.create_text(175, 320, fill="darkblue", font="Arial 15", text=data.get('results', 'No Results'))
+   
+    
+def main():
     greet()
+    display_math_window = False  
     while True:
         user_input=userCommand()                                  #Getting the commands of user in the form of list
         
@@ -577,8 +626,42 @@ if __name__=="__main__":
             result = ans_to_que(user_query, wolfram_app_id)
             speak(result)
             print(result)
-                  
+            
+        elif 'solve maths question' in input_text:
+            
+            speak('Opening maths solver')
+            root = tk.Tk()
+            root.title("Math Solver")
+
+            #Setting dimensions of root page
+            w = 500
+            h = 500
+            x = 50
+            y = 100
+
+            root.geometry("%dx%d+%d+%d" % (w, h, x, y))
+
+            # creating a white canvas
+            canvas = tk.Canvas(bg='white')
+            canvas.config(height=350)
+            canvas.pack()
+
+            # creating entry box to get user input
+            entry1 = tk.Entry(root) 
+            canvas.create_window(150, 15, window=entry1)
+
+            #  creating submit button
+            submit = tk.Button(text='Solve',command=lambda: math(canvas, entry1),height=2, width = 5)  #type:ignore
+            canvas.create_window(280, 15, window=submit)
+
+            #calling math function
+            root.mainloop()
+            # math(canvas,entry1)
                 
+                    
         elif 'exit' in input_text:
             speak('Hope you enjoyed my services!!!Signing off!!')
             break
+        
+if __name__=='__main__':
+    main()
