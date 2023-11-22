@@ -506,7 +506,7 @@ def main():
             time.sleep(3)                                            
             speak('Taking screenshot')
             #Saving the screenshot as per user's filename
-            img=pyautogui.screenshot(f'Byte-Voice/{name}.png')        
+            img=pyautogui.screenshot(f'Byte-Voice/Images/{name}.png')        
             speak('Screenshot saved successfully!!')
             
         elif 'play music' in input_text:
