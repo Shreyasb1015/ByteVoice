@@ -491,7 +491,7 @@ def main():
             speak('Opening YouTube')
             webbrowser.open('youtube.com')
             #Waiting for youtube to open
-            time.sleep(2)                                           
+            time.sleep(4)                                           
             pyautogui.press('/')                                     #Shortcut for selecting youtube search box
             # Typing the voice input in the YouTube search bar
             pyautogui.typewrite(f'{search_input}')  
