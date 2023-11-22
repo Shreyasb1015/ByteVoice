@@ -438,7 +438,7 @@ def math(canvas,entry1):
     # Display the result text
     canvas.create_text(175, 320, fill="darkblue", font="Arial 15", text=data.get('results', 'No Results'))
     
-list_command=['wikipedia','open google','open youtube','close youtube','search google','search youtube','take screenshot','play music','stop music',
+list_command=['wikipedia','open google','close google','open youtube','close youtube','search google','search youtube','take screenshot','play music','stop music',
               'volume up','volume down','volume mute','click photo','stop camera','open command prompt','close command prompt','open java code editor',
               'open kotlin code editor','close window','open vscode','create code file','refresh the screen','scroll down','scroll up','thanks bytevoice',
               'write in notepad','close notepad','developer information','tell me a joke','weather update','ask me a riddle','tell me a quote','set meditation timer',

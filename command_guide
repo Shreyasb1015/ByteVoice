@@ -1,0 +1,47 @@
+
+This file contains all the commands which are supported by ByteVoice. Functionality of each command is listed below:-
+
+wikipedia {{topic_name}} --> Wikipedia command is used to search about any topic using wikipedia module.Topic_name refers to the topic that you
+                             want to search about  
+
+open google -->  To open google engine
+close google --> To close google engine
+open youtube --> To open youtube 
+close youtube --> To close youtube
+search google --> To search on google
+search youtube -->To search on youtube
+take screenshot --> To take screenshot
+play music   --> To play any random msuic from your music directory
+stop music   -->To stop music
+volume up   --> To increase volume
+volume down -->To decrease volume
+volume mute   -->To mute volume
+click photo  -->To click photo
+stop camera   -->To stop camera
+open command prompt -->To open command prompt
+close command prompt  -->To close command prompt
+open java code editor -->To open java code editor (Intellij)
+open kotlin code editor --> To open kotlin code editor (Intellij)
+close window  -->To close any window
+open vscode   -->To open vscode editor
+create code file  -->To create a code file of specific language in vscode editor
+refresh screen -->To refresh screen
+scroll down   -->To scroll down the window
+scroll up    -->To scroll up the window
+thanks bytevoice --> To thanks bytevocie for its efforts
+write in notepad -->To write any note in notepad
+close notepad   -->To close notepad
+developer information  -->To get information of developer of ByteVoice
+tell me a joke    --> To request ByteVoice to tell a joke to the user. 
+weather update  --> To request ByteVoice to tell weather updates about specific location.
+ask me a riddle   --> To request ByteVoice to ask user a intresting riddle.
+tell me a quote   -->To request ByteVoice to tell user a quote.
+set meditation timer   --> To set meditation timer in seconds.
+answer my question --> To get answer from ByteVoice to a mathematical or scientific or physics related question.
+solve maths question  -->To request ByteVoice to solve any basic mathematics equation or numerical.
+exit -->To stop ByteVoice program
+
+
+
+
+                            
