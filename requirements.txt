@@ -15,6 +15,8 @@ random --inbuilt package
 asyncio --inbuilt package
 tkinter --inbuilt package
 wolframalpha --version --5.0.0
+base64 --inbuilt package
+urllib --inbuilt package
 
 ### API  ###
 
@@ -22,4 +24,5 @@ jokeapi --version--1.0.5
 riddle_api_url ==> https://riddles-api.vercel.app/random
 quote_api_url ==>  https://type.fit/api/quotes
 weather_api_url ==> http://api.openweathermap.org/data/2.5/weather
+wolframalpha ==> https://products.wolframalpha.com/api
 
