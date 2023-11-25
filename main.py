@@ -232,7 +232,7 @@ def get_weatherinfo(city):
     base_url = "http://api.openweathermap.org/data/2.5/weather"
     params = {
         'q': city,
-        'appid': '897d6cb747ac9abbdc978c14364c1925',
+        'appid': 'YOUR_API_KEY',
         'units': 'metric'  
     }
 
@@ -395,7 +395,7 @@ def ans_to_que(query, app_id):
 def math(canvas,entry1):
     
  
-    API_KEY = 'KH7XAP-8P76865RYR'
+    API_KEY = 'YOUR_API_KEY'
     client = wolframalpha.Client(API_KEY)
 
     eq = entry1.get()            #To get the input entered by user.
